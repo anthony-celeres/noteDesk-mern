@@ -131,4 +131,25 @@ module.exports = {logEvents, logger};
 
 Import the logger to server.js
 
+Type "npm run dev" in cmd, and reload the localhost:3500, and you can now see the log in the terminal and a reqLog.log file inside logs
+
+Create errorHandling.js inside middleware folder and write
+const {logEvents} = require('./logger');
+
+const errorHandler = (err, req, res, next) => {
+    logEvents(`${err.name}: ${err.message}\t${req.method}\t${req.url}\t${req.headers.origin}`, 'errLog.log');
+    console.log(err.stack);
+    const status = res.statusCode ? res.statusCode : 500; 
+
+    res.status(status);
+    res.json({ message: err.message});
+}
+
+module.exports = errorHandler;
+
+Import the errorHandling to server.js
+
+Type "npm i cookie-parser" in cmd
+Import cookieParser to server.js
+
 
