@@ -64,11 +64,13 @@ const express = require('express');
 const router = express.Router();
 const path = require('path');
 
-router.get(/^\/$|\/index(.html)?/, (req, res) => {
-  res.sendFile(path.join(__dirname, '../views/index.html'));
-});
+router.get('^/$|/index(.html)?', (req, res) => {
+  res.sendFile(path.join(__dirname, '../views', 'index.html'));
+}); 
 
 module.exports = router;
+
+Run npm install express@4 if you got regex expressions error
 
 Create the views folder and index.html inside and write
 <!DOCTYPE html>
@@ -85,4 +87,16 @@ Create the views folder and index.html inside and write
 </body>
 </html>
 
+
+Create the 404.html inside the views
+
+MIDDLE WARE
+
+Create logs and middleware folders
+
+Update .gitignore file
+node_modules
+logs
+
+Type "npm i date-fns uuid" in the cmd
 
