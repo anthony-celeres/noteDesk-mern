@@ -152,4 +152,33 @@ Import the errorHandling to server.js
 Type "npm i cookie-parser" in cmd
 Import cookieParser to server.js
 
+Type "npm i cors" in cmd
+Import cors to server.js
+
+Create config folder
+Create allowedOrigins.js file inside config folder and write
+const allowedOrigins = [
+  'http://localhost:3000',
+  'https://www.danderepairshop.com',
+  'https://danderepairshop.com',
+]
+
+module.exports = allowedOrigins;
+
+Create corsOptions.js file inside config folder and write
+const allowedOrigins = require('./allowedOrigins');
+
+const corsOptions = {
+  origin: (origin, callback) => {
+    if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true,
+  optionsSuccessStatus: 200
+}
+
+module.exports = corsOptions;
 
